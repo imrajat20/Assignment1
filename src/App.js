@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import HomePage from './components/Homepage/HomePage';
+import VoteForm from './components/VoteForm/VoteForm';
+import VoteList from './components/VoteList/VoteList';
+
+const candidates = [
+  'Amit',
+  'Atul',
+  'Aryan'
+];
 
 function App() {
+
+  const [formShown, setFormShown] = useState(false);
+
+  const showForm = () => {
+    setFormShown(true);
+  } 
+  const hideForm = () => {
+    setFormShown(false);
+  };
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div>
+     { formShown && <VoteForm onClick={hideForm}/>}
+    <HomePage onClick={showForm}/>
+    <VoteList value={candidates}/>
+   </div>
   );
 }
 
